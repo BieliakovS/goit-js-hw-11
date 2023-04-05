@@ -1,6 +1,8 @@
 import ImageCard from './templates/imageCard.hbs';
 import { getImages } from './js/getImages';
 import Notiflix from 'notiflix';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const refs = {
   searchForm: document.querySelector('#search-form'),
@@ -31,6 +33,8 @@ async function onSubmitForm(e) {
     totalHits = obj.data.totalHits;
     nowHits += obj.data.hits.length;
 
+    console.log(obj.data)
+
     if (nowHits <= obj.config.params.per_page) {
       Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
     }
@@ -51,7 +55,7 @@ async function onSubmitForm(e) {
   } catch (error) {
     console.warn(error);
   }
-}
+};
 
 async function onLoadMoreBtnClick(e) {
   e.preventDefault();
@@ -73,7 +77,7 @@ async function onLoadMoreBtnClick(e) {
   } catch (error) {
     console.warn(error);
   }
-}
+};
 
 function markGallery(obj) {
   let markup = '';
@@ -83,4 +87,7 @@ function markGallery(obj) {
   }
 
   refs.gallery.insertAdjacentHTML('beforeend', markup);
-}
+};
+
+
+let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
