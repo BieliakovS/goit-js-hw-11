@@ -65,8 +65,6 @@ async function onLoadMoreBtnClick(e) {
 
     markGallery(obj);
 
-    lightbox.refresh();
-
     if (nowHits >= totalHits) {
       refs.loadMoreBtn.setAttribute('hidden', true);
 
@@ -90,4 +88,6 @@ function markGallery(obj) {
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 
   const lightbox = new SimpleLightbox('.gallery a', {});
+
+  lightbox.refresh();
 }
