@@ -90,4 +90,15 @@ function markGallery(obj) {
   const lightbox = new SimpleLightbox('.gallery a', {});
 
   lightbox.refresh();
+
+  if (nowHits > obj.config.params.per_page) {
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
 }
